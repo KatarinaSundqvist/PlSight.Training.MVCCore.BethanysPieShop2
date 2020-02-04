@@ -10,7 +10,7 @@ namespace BethanysPieShop2 {
         public void ConfigureServices(IServiceCollection services) {
             services.AddScoped<IPieRepository, MockPieRepository>();
             services.AddScoped<ICategoryRepository, MockCategoryRepository>();
-            
+
             services.AddControllersWithViews();
         }
 
@@ -26,7 +26,7 @@ namespace BethanysPieShop2 {
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Pie}/{action=List}/{id?}");
             });
         }
     }
