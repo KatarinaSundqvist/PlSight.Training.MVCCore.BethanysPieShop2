@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace BethanysPieShop2.Models {
-    public class MockPieRepository {
+    public class MockPieRepository: IPieRepository {
         private readonly ICategoryRepository _categoryRepository = new MockCategoryRepository();
 
         public IEnumerable<Pie> AllPies =>

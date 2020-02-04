@@ -1,3 +1,4 @@
+using BethanysPieShop2.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,6 +8,9 @@ namespace BethanysPieShop2 {
     public class Startup {
 
         public void ConfigureServices(IServiceCollection services) {
+            services.AddScoped<IPieRepository, MockPieRepository>();
+            services.AddScoped<ICategoryRepository, MockCategoryRepository>();
+            
             services.AddControllersWithViews();
         }
 
