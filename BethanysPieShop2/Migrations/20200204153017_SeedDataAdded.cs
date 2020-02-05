@@ -1,11 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace BethanysPieShop2.Migrations
-{
-    public partial class SeedDataAdded : Migration
-    {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
+namespace BethanysPieShop2.Migrations {
+    public partial class SeedDataAdded : Migration {
+        protected override void Up(MigrationBuilder migrationBuilder) {
             migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "CategoryId", "CategoryName", "Description" },
@@ -40,8 +37,7 @@ namespace BethanysPieShop2.Migrations
                 });
         }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
+        protected override void Down(MigrationBuilder migrationBuilder) {
             migrationBuilder.DeleteData(
                 table: "Pies",
                 keyColumn: "PieId",

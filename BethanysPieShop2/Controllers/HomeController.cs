@@ -6,18 +6,18 @@ using Microsoft.AspNetCore.Mvc;
 namespace BethanysPieShop2.Controllers {
     public class HomeController : Controller {
 
-            private readonly IPieRepository _pieRepository;
+        private readonly IPieRepository _pieRepository;
 
-            public HomeController(IPieRepository pieRepository) {
-                _pieRepository = pieRepository;
-            }
+        public HomeController(IPieRepository pieRepository) {
+            _pieRepository = pieRepository;
+        }
 
-            public IActionResult Index() {
-                var homeViewModel = new HomeViewModel {
-                    PiesOfTheWeek = _pieRepository.PiesOfTheWeek
-                };
+        public IActionResult Index() {
+            var homeViewModel = new HomeViewModel {
+                PiesOfTheWeek = _pieRepository.PiesOfTheWeek
+            };
 
-                return View(homeViewModel);
-            }
+            return View(homeViewModel);
         }
     }
+}
