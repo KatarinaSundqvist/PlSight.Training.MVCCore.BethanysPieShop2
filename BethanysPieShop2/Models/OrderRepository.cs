@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace BethanysPieShop2.Models {
-    public class OrderRepository: IOrderRepository {
+    public class OrderRepository : IOrderRepository {
 
         private readonly AppDbContext _appDbContext;
         private readonly ShoppingCart _shoppingCart;
@@ -15,18 +15,19 @@ namespace BethanysPieShop2.Models {
         }
 
         public void CreateOrder(Order order) {
-            
+
             order.OrderPlaced = DateTime.Now;
-            
+
             _appDbContext.Orders.Add(order);
+            _appDbContext.SaveChanges();
 
             var shoppingCartItems = _shoppingCart.ShoppingCartItems;
-           
+
             foreach (var shoppingCartItem in shoppingCartItems) {
-                var orderDetail = new OrderDetail {
+                var orderDetail = new OrderDetail() {
                     Amount = shoppingCartItem.Amount,
                     PieId = shoppingCartItem.Pie.PieId,
-                    OrderId=order.OrderId,
+                    OrderId = order.OrderId,
                     Price = shoppingCartItem.Pie.Price
                 };
 
@@ -34,5 +35,27 @@ namespace BethanysPieShop2.Models {
             }
             _appDbContext.SaveChanges();
         }
+
+        //public void CreateOrder(Order order) {
+        //    order.OrderPlaced = DateTime.Now;
+
+        //    var shoppingCartItems = _shoppingCart.ShoppingCartItems;
+        //    order.OrderTotal = _shoppingCart.GetShoppingCartTotal();
+
+        //    order.OrderDetails = new List<OrderDetail>();
+        //    // adding the order with its details
+
+        //    foreach (var shoppingCartItem in shoppingCartItems) {
+        //        var OrderDetail = new OrderDetail {
+        //            Amount = shoppingCartItem.Amount,
+        //            PieId = shoppingCartItem.Pie.PieId,
+        //            Price = shoppingCartItem.Pie.Price
+        //        };
+
+        //        order.OrderDetails.Add(OrderDetail);
+        //    }
+        //    _appDbContext.Orders.Add(order);
+        //    _appDbContext.SaveChanges();
+        //}
     }
 }
