@@ -1,16 +1,12 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using System;
 
-namespace BethanysPieShop2.Migrations
-{
-    public partial class OrderFunctionality : Migration
-    {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
+namespace BethanysPieShop2.Migrations {
+    public partial class OrderFunctionality : Migration {
+        protected override void Up(MigrationBuilder migrationBuilder) {
             migrationBuilder.CreateTable(
                 name: "Orders",
-                columns: table => new
-                {
+                columns: table => new {
                     OrderId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(nullable: true),
@@ -26,15 +22,13 @@ namespace BethanysPieShop2.Migrations
                     OrderTotal = table.Column<decimal>(nullable: false),
                     OrderPlaced = table.Column<DateTime>(nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Orders", x => x.OrderId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "OrderDetails",
-                columns: table => new
-                {
+                columns: table => new {
                     OrderDetailId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderId = table.Column<int>(nullable: false),
@@ -42,8 +36,7 @@ namespace BethanysPieShop2.Migrations
                     Amount = table.Column<int>(nullable: false),
                     Price = table.Column<decimal>(nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_OrderDetails", x => x.OrderDetailId);
                     table.ForeignKey(
                         name: "FK_OrderDetails_Orders_OrderId",
@@ -70,8 +63,7 @@ namespace BethanysPieShop2.Migrations
                 column: "PieId");
         }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
+        protected override void Down(MigrationBuilder migrationBuilder) {
             migrationBuilder.DropTable(
                 name: "OrderDetails");
 
