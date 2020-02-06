@@ -39,6 +39,7 @@ namespace BethanysPieShop2 {
             app.UseSession(); // Make sure to call UseSession before UseRouting
 
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllerRoute(
