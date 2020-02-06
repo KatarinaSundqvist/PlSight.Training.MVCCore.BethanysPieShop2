@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BethanysPieShop2.Models {
     public class OrderRepository : IOrderRepository {
@@ -11,48 +12,48 @@ namespace BethanysPieShop2.Models {
             _shoppingCart = shoppingCart;
         }
 
-        public void CreateOrder(Order order) {
-
-            order.OrderPlaced = DateTime.Now;
-
-            _appDbContext.Orders.Add(order);
-            _appDbContext.SaveChanges();
-
-            var shoppingCartItems = _shoppingCart.ShoppingCartItems;
-
-            foreach (var shoppingCartItem in shoppingCartItems) {
-                var orderDetail = new OrderDetail() {
-                    Amount = shoppingCartItem.Amount,
-                    PieId = shoppingCartItem.Pie.PieId,
-                    OrderId = order.OrderId,
-                    Price = shoppingCartItem.Pie.Price
-                };
-
-                _appDbContext.OrderDetails.Add(orderDetail);
-            }
-            _appDbContext.SaveChanges();
-        }
-
         //public void CreateOrder(Order order) {
+
         //    order.OrderPlaced = DateTime.Now;
 
-        //    var shoppingCartItems = _shoppingCart.ShoppingCartItems;
-        //    order.OrderTotal = _shoppingCart.GetShoppingCartTotal();
+        //    _appDbContext.Orders.Add(order);
+        //    _appDbContext.SaveChanges();
 
-        //    order.OrderDetails = new List<OrderDetail>();
-        //    // adding the order with its details
+        //    var shoppingCartItems = _shoppingCart.ShoppingCartItems;
 
         //    foreach (var shoppingCartItem in shoppingCartItems) {
-        //        var OrderDetail = new OrderDetail {
+        //        var orderDetail = new OrderDetail() {
         //            Amount = shoppingCartItem.Amount,
         //            PieId = shoppingCartItem.Pie.PieId,
+        //            OrderId = order.OrderId,
         //            Price = shoppingCartItem.Pie.Price
         //        };
 
-        //        order.OrderDetails.Add(OrderDetail);
+        //        _appDbContext.OrderDetails.Add(orderDetail);
         //    }
-        //    _appDbContext.Orders.Add(order);
         //    _appDbContext.SaveChanges();
         //}
+
+        public void CreateOrder(Order order) {
+            order.OrderPlaced = DateTime.Now;
+
+            var shoppingCartItems = _shoppingCart.ShoppingCartItems;
+            order.OrderTotal = _shoppingCart.GetShoppingCartTotal();
+
+            order.OrderDetails = new List<OrderDetail>();
+            // adding the order with its details
+
+            foreach (var shoppingCartItem in shoppingCartItems) {
+                var OrderDetail = new OrderDetail {
+                    Amount = shoppingCartItem.Amount,
+                    PieId = shoppingCartItem.Pie.PieId,
+                    Price = shoppingCartItem.Pie.Price
+                };
+
+                order.OrderDetails.Add(OrderDetail);
+            }
+            _appDbContext.Orders.Add(order);
+            _appDbContext.SaveChanges();
+        }
     }
 }
